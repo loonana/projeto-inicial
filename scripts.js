@@ -10,21 +10,45 @@ var compl = document.getElementById('complemento');
 var bairro = document.getElementById('bairro');
 var cid = document.getElementById('cidade');
 var estd = document.getElementById('estado');
- 
- 
-botao.addEventListener('click', function(e) {
-   
- 
-    saida.innerText = `Nome: ${nome.value}  ` + 
-    `\nEmail: ${email.value}  ` + 
-    `\nTelefone: ${telefone.value}  ` + 
-    `\nCEP: ${cep.value}  ` + 
-    `\nLogradouro: ${logradouro.value}  ` +
-    `\nNúmero: ${numero.value}` + 
-    `\nComplemento: ${compl.value}  ` + 
-    `\nBairro: ${bairro.value}  ` + 
-    s`\nCidade: ${cidade.value}` +
-    `\nEstado: ${estado.value}`;
+
+function(dadosDoEndereco){
+    logr.value = dadosDoEndereco.logradouro; 
+    bairro.value = dadosDoEndereco.bairro; 
+    cid.value = dadosDoEndereco.cidade; 
+    estd.value = dadosDoEndereco.estado; 
+    compl.value = dadosDoEndereco.complemento; 
+
+    saidaDeDados(); // chamada da função
+
+}
+
+
+function saidaDeDados(){
+    
+    saida.innerText =
+    "Nome :" + nome.value + 
+    "\n Email: " + email.value + 
+    "\n Telefone: " + tel.value;
+    "\n Logradouro: " + logr.value; 
+    "\n CEP: " + cep.value; 
+    "\n Número: " + num.value; 
+    "\n Complemento: " + compl.value; 
+    "\n Bairro: " + bairro.value; 
+    "\n Cidade: " + cid.value; 
+    "\n Estado: " + estd.value; 
+
+}
+
+    // validação dos dados: 
+
+    if(cep.value.length < 8 ){
+        alert('CEP inválido');
+        return; 
+    }
+
+    // formatar dados: 
+
+    cep.value = cep.value.replace('-', ''); 
  
     const url = `https://viacep.com.br/ws/${cep.value}/json`;
    
@@ -34,11 +58,10 @@ botao.addEventListener('click', function(e) {
     })
     
     .then(function(dadosDoEndereco){
-            logradouro.value = dadosDoEndereco.logradouro;
+            logr.value = dadosDoEndereco.logradouro;
             bairro.value = dadosDoEndereco.bairro;
-            cidade.value = dadosDoEndereco.localidade;
-            estado.value = dadosEndereco.uf;
-            complemento.value = dadosDoEndereco.complemento;
+            cid.value = dadosDoEndereco.localidade;
+            estd.value = dadosEndereco.uf;
+            compl.value = dadosDoEndereco.complemento;
      
         });
-    });
